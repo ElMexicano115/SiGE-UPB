@@ -3,6 +3,10 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+// Livewire
+use App\Livewire\Registro;
+// Livewire
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,9 +17,14 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+/*
 Route::get('/', function () {
     return view('welcome');
+});
+*/
+Route::redirect("/", "/registro");
+Route::get('/registro', function () {
+    return view('Formularios.registro');
 });
 
 Route::get('/dashboard', function () {
