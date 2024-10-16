@@ -1,0 +1,73 @@
+#cuerpo{
+    background-color: #c7dcff;
+}
+main {
+    display: flex;
+    justify-content: center;
+    margin-top: 250px;
+    /*background-image: url(/storage/assets/imgForm/FONDO1.png);*/
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: fit-content;
+    font-family: "Roboto", sans-serif;
+    /*border: solid 1px;*/
+}
+
+.inside {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: auto;
+    /* Adjust height as needed */
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.banner {
+    background-color: #f0f0f0;
+}
+
+.banner.auto-height {
+    height: auto !important;
+    /* Override height to auto when scroll position is at the top */
+}
+
+.banner.fixed-height {
+    height: 200px;
+    /* Initial height */
+    min-height: 100px;
+    /* Minimum height */
+}
+
+#navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #4287f5;
+    display: flex;
+    /* Use flexbox */
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+    min-height: 80px;
+    /* Set minimum height */
+    max-height: 200px;
+    /* Set maximum height */
+    overflow: hidden;
+    /* Hide overflow content */
+    padding: 0;
+    /* Remove padding */
+    margin: 0;
+    /* Remove margin */
+    z-index: 1000;
+    /* Ensure navbar is above other elements */
+}
+
+#navbar img {
+    width: auto;
+    /* Take entire width of navbar */
+    height: 100%;
+}
