@@ -2,12 +2,18 @@
 
 namespace App\Livewire;
 
+use App\Models\Config;
+
 use Livewire\Component;
 
 class Registro extends Component
 {
     public function render()
     {
-        return view('livewire.registro');
+        $infoAdicional = Config::find(5);
+        $taller_link = Config::find(2);
+        $redes_link = Config::find(3);
+        $contacto_link = Config::find(4);
+        return view('livewire.registro', compact('taller_link', 'redes_link', 'contacto_link', 'infoAdicional'));
     }
 }

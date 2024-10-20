@@ -1,6 +1,10 @@
 #cuerpo{
     background-color: #c7dcff;
 }
+footer {
+    position: fixed;
+    bottom: 0;
+}
 main {
     display: flex;
     justify-content: center;

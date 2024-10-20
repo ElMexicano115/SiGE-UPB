@@ -327,6 +327,11 @@ return [
             'label' => 4,
             'label_color' => 'success',
         ],
+        [
+            'text' => 'Formulario',
+            'url' => '/administrador/formulario',
+            'icon' => 'far fa-fw fa-file',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
@@ -546,5 +551,5 @@ return [
     |
     */
 
-    'livewire' => false,
+    'livewire' => true,
 ];
