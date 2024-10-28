@@ -49,7 +49,6 @@ main {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #4287f5;
     display: flex;
     /* Use flexbox */
     justify-content: center;

@@ -24,7 +24,8 @@
 </style>
 <div id="formulario">
     <div id="contenido">
-        <div style="background-color: #4287f5; display:flex; justify-content:center; color:white">
+        <div
+            style="background-color: {{ $configuracion->where('Apartado', '=', 'colorFondoTituloFormulario')->first()->Valor }}; display:flex; justify-content:center; color:{{ $configuracion->where('Apartado', '=', 'colorTextoTituloFormulario')->first()->Valor }}">
             <div>
                 <h1>Formulario de registro</h1><!-- Esta seccion sera ajustable mediante una variable-->
             </div>
@@ -33,7 +34,7 @@
         <div style="text-align: left; font-family: 'Roboto', sans-serif;">
             <h3>
                 Por favor, complete el siguiente formulario con la información
-                solicitada: 
+                solicitada:
             </h3>
             <br />
         </div>
@@ -41,7 +42,7 @@
         <div class="row">
             <!-- Formulario -->
             <div class="col">
-                <div class="container" style="background:#a7e9ff; border-radius: 10px;">
+                <div class="container" style="background:{{ $configuracion->where('Apartado', '=', 'colorFondoFormulario')->first()->Valor }}; border-radius: 10px; color: {{ $configuracion->where('Apartado', '=', 'colorTextoFormulario')->first()->Valor }}">
                     <form id="registroForm" action="{{ url('/') }}" method="post" enctype="multipart/form-data"
                         style="text-align: left; ">
                         @csrf
@@ -133,7 +134,7 @@
                             </div>
                         </div>
                         <br />
-                        <button type="submit" class="btn btn-primary iconnn" style="background-color: #4287f5"
+                        <button type="submit" class="btn iconnn" style="background-color: {{ $configuracion->where('Apartado', '=', 'colorBotonFormulario')->first()->Valor }}; color: {{ $configuracion->where('Apartado', '=', 'colorBotonTextoFormulario')->first()->Valor }}"
                             onclick="limpiarCampos()">
                             Registrarse
                         </button>
@@ -142,28 +143,28 @@
                 </div>
             </div>
             <!-- Información adicional -->
-            @if( $infoAdicional->Valor == "activado")
-            <div class="col-md-5">
-                <!-- Columna 1 -->
-                @if( $contacto_link->Valor == "activado")
-                    @livewire("contacto-link")
-                    <br /><br />
-                @endif
+            @if ($infoAdicional->Valor == 'activado')
+                <div class="col-md-5">
+                    <!-- Columna 1 -->
+                    @if ($contacto_link->Valor == 'activado')
+                        @livewire('contacto-link')
+                        <br /><br />
+                    @endif
 
 
-                <!-- Columna 2  -->
-                @if( $taller_link->Valor == "activado")
-                    @livewire("taller-link")
-                    <br /><br />
-                @endif
-                
+                    <!-- Columna 2  -->
+                    @if ($taller_link->Valor == 'activado')
+                        @livewire('taller-link')
+                        <br /><br />
+                    @endif
 
-                <!-- Columna 3 -->
-                @if( $redes_link->Valor == "activado")
-                    @livewire("redes-link")
-                    <br /><br />
-                @endif
-            </div>
+
+                    <!-- Columna 3 -->
+                    @if ($redes_link->Valor == 'activado')
+                        @livewire('redes-link')
+                        <br /><br />
+                    @endif
+                </div>
             @endif
         </div>
     </div>

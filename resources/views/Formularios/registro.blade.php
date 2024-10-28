@@ -12,14 +12,14 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
 </head>
-<body id="cuerpo">
-    <div id="navbar">
-        <img src="{{ asset('/assets/Formulario/logo.png') }}" alt="banner" id="banner">
+<body id="cuerpo" style="background-color: {{ $configuracion->where("Apartado", "=", "colorFondo")->first()->Valor }}">
+    <div id="navbar" style="background-color: {{ $configuracion->where("Apartado", "=", "colorLogo")->first()->Valor }}">
+        <img src="{{ asset('/assets/Formulario/'.$configuracion->where("Apartado", "=", "logo")->first()->Valor) }}" alt="banner" id="banner">
     </div>
     <main>
-        @if( $configuracion->Valor == 'activado')
+        @if( $configuracion->where("Apartado", "=", "registro")->first()->Valor == 'activado')
             @livewire("registro")
-        @elseif( $configuracion->Valor == 'mantenimiento')
+        @elseif( $configuracion->where("Apartado", "=", "registro")->first()->Valor == 'mantenimiento')
             <div style="text-align: center">
                 <img src="/assets/Formulario/mantenimiento.png" alt="Regresa_luego" style="width: 20%"><br><br>
                 <h1>Lo sentimos, la pagina se encuentra en mantenimiento <br> intentelo de nuevo en unos minutos</h1>
@@ -32,18 +32,19 @@
         @endif
     </main>
     <!-- Pie de página -->
-    <footer class="footer" style="background-color: #4287f5; color: white; padding: 30px; width: 100%;">
+    <footer class="footer" style="background-color: {{ $configuracion->where('Apartado', '=', 'colorFooter')->first()->Valor }}; color:{{ $configuracion->where('Apartado', '=', 'colorTextoFooter')->first()->Valor }}; padding: 30px; width: 100%;">
         <div class="container">
             <div class="row">
                 <div class="container text-center">
-                    Derechos reservados &copy; SiGE |
+                    {{ $configuracion->where('Apartado', '=', 'textoFooter')->first()->Valor }}
                     <span id="fecha"></span>
                 </div>
-                <!-- JavaScript to display the current year -->
+                <!-- JavaScript to display the current year 
                 <script>
                     var fecha = new Date();
                     document.getElementById("fecha").innerHTML = fecha.getFullYear();
                 </script>
+                -->
             </div>
         </div>
     </footer>

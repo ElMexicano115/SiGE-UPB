@@ -14,6 +14,7 @@ class Registro extends Component
         $taller_link = Config::find(2);
         $redes_link = Config::find(3);
         $contacto_link = Config::find(4);
-        return view('livewire.registro', compact('taller_link', 'redes_link', 'contacto_link', 'infoAdicional'));
+        $configuracion = Config::all();
+        return view('livewire.registro', compact('taller_link', 'redes_link', 'contacto_link', 'infoAdicional', 'configuracion'));
     }
 }
