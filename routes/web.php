@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormBEController;
+use App\Http\Controllers\RegistroController;
 
 // Livewire
 use App\Livewire\Registro;
@@ -25,6 +26,7 @@ Route::get('/laravel', function () {
 
 Route::redirect("/", "/registro");
 Route::get('/registro', [FormBEController::class, 'formControl']);
+Route::post('/', [RegistroController::class, 'registrarUsuario'])->name('registro.usuario');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

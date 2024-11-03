@@ -66,19 +66,29 @@
                         </div>
                         <!-- Seccion para las universidades-->
                         <div class="mb-3">
-                            <label for="universidad" class="fw-bold">Universidad de procedencia:*</label>
-                            <select class="form-select mb-3" aria-label="Default select example" name="universidad"
+                            <label for="organizacion" class="fw-bold">Universidad de procedencia:*</label>
+                            <select class="form-select mb-3" aria-label="Default select example" name="organizacion"
                                 required>
-                                <option selected>- Seleccione una universidad -</option>
-                                <!-- lista de universidades generada dinamicamente
-                                
-                                -->
+                                <option selected>- Seleccione una organización -</option>
+                                <!-- lista de universidades generada dinamicamente -->
+                                @foreach ($organizaciones as $organizacion)
+                                    <option value="{{ $organizacion->id}}">{{$organizacion->nombre}}</option>
+                                @endforeach
                             </select>
                         </div>
 
                         <!-- Seccion para el tipo de participante -->
                         <label for="tipo-de-participante" class="fw-bold">Tipo de participante:*</label><br />
-
+                        @foreach ($roles as $rol)
+                            <div class="form-check mb-3 form-check-inline ms-5">
+                                <input class="form-check-input" type="radio" name="flexRadioRole"
+                                    id="{{ $rol->nombre }}" value="{{ $rol->nombre }}"
+                                    {{ $rol->id == 1 ? 'checked' : '' }} />
+                                <label class="form-check-label" for="{{ $rol->nombre }}">
+                                    {{ $rol->nombre }}
+                                </label>
+                            </div>
+                        @endforeach
                         <br />
 
                         <div id="ponenteField" style="display: none">

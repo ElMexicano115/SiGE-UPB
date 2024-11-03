@@ -1,7 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+//Modelo config
 use App\Models\Config;
+//Modelo para acceder a los roles
+use App\Models\Role;
+//Modelo para acceder a las organizaciones
+use App\Models\Organizacion;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -11,7 +16,15 @@ class FormBEController extends Controller
     public function formControl()
     {
         $configuracion = Config::all();
+        $roles = Role::all();
+        $organizaciones = Organizacion::all();
         return view('Formularios.registro', compact('configuracion'));
+    }
+    public function formTry()
+    {
+        $roles = Role::all();
+        $organizaciones = Organizacion::all();
+        return view('formularioTry', compact('roles','organizaciones'));
     }
     public function showConfig()
     {

@@ -18,7 +18,7 @@
     </div>
     <main>
         @if( $configuracion->where("Apartado", "=", "registro")->first()->Valor == 'activado')
-            @livewire("registro")
+        @livewire('registro')
         @elseif( $configuracion->where("Apartado", "=", "registro")->first()->Valor == 'mantenimiento')
             <div style="text-align: center">
                 <img src="/assets/Formulario/mantenimiento.png" alt="Regresa_luego" style="width: 20%"><br><br>
