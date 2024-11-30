@@ -332,6 +332,21 @@ return [
             'url' => '/administrador/formulario',
             'icon' => 'far fa-fw fa-file',
         ],
+        ['header' => 'Elementos del registro/evento'],
+        [
+            'text' => 'Organizaciones',
+            'icon' => 'fas fa-fw fa-university',
+            'submenu' => [
+                [
+                    'text' => 'Administrar',
+                    'url' => '/organizacion',
+                ],
+                [
+                    'text' => 'Añadir',
+                    'url' => '/añadir_organizacion',
+                ],
+            ],
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
