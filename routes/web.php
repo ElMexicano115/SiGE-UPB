@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormBEController;
 use App\Http\Controllers\RegistroController;
+use App\Http\Controllers\panelController;
 
 // Livewire
 use App\Livewire\Registro;
@@ -47,7 +48,9 @@ Route::middleware(['auth', 'is.admin'])->group(function () {
     // Rutas comunes para todos los administradores
     //Listado de las organizaciones y sus opciones
     Route::get('/organizacion', [OrganizacionController::class, 'index'])->name('organizacion');
-
+    Route::get("/administrador/adminPanel", [panelController::class, 'index'])->name('inicio');
+    Route::get("gafeteTest", [RegistroController::class, 'gafeteTest'])->name('gafeteTest');
+    Route::get("downloadGafete", [RegistroController::class, 'downloadgafete'])->name('downloadGafete');
 });
 
 // Rutas accesibles solo para administradores de tipo 1
