@@ -342,20 +342,6 @@ return [
             ],
         ],
         [
-            'text' => 'Mesas',
-            'icon' => 'fas fa-fw fa-dice',
-            'submenu' => [
-                [
-                    'text' => 'Administrar',
-                    'url' => '/mesa',
-                ],
-                [
-                    'text' => 'Añadir',
-                    'url' => '/registroM',
-                ],
-            ],
-        ],
-        [
             'text' => 'Talleres',
             'icon' => 'fas fa-fw fa-hammer',
             'submenu' => [
@@ -392,6 +378,20 @@ return [
             'text' => 'Constancias',
             'url' => '/constancias',
             'icon' => 'fas fa-envelope',
+        ],
+        [
+            'text' => 'Admin',
+            'icon' => 'fas fa-user-shield',
+            'submenu' => [
+                [
+                    'text' => 'Administrar',
+                    'url' => '/admins',
+                ],
+                [
+                    'text' => 'Añadir',
+                    'url' => '/añadir_admin',
+                ],
+            ],
         ],
     ],
 

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormBEController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\panelController;
+use App\Http\Controllers\AdminController;
 
 // Livewire
 use App\Livewire\Registro;
@@ -85,6 +86,21 @@ Route::middleware(['auth', 'admin.type:1'])->group(function () {
     Route::put('/mesas/{mesa}', [MesaController::class, 'update'])->name('actualizar.mesa');
     // Ruta para eliminar una mesa especifico
     Route::delete('/mesas/{mesa}', [MesaController::class, 'destroy'])->name('borrar.mesa');
+
+    //Listar admin y opciones extra
+    Route::get('/añadir_admin', function () {
+        return view('Administrador.registrar_admin');
+    })->name('registro.admin');
+    Route::post('/admin/register', [AdminController::class, 'registerUser'])->name('admin.register');
+
+     // Ruta para listar administradores
+     Route::get('/admins', [AdminController::class, 'index'])->name('admins.index');
+
+     // Ruta para editar un administrador
+     Route::get('/admins/{id}/edit', [AdminController::class, 'edit'])->name('editar.admin');
+ 
+     // Ruta para borrar un administrador
+     Route::delete('/admins/{id}', [AdminController::class, 'destroy'])->name('borrar.admin');
 });
 
 // Rutas accesibles solo para administradores de tipo 2
