@@ -16,6 +16,11 @@
 @endif
 
 @section('content')
+<style>
+    .main-sidebar{
+      background: #0F3759 !important;
+    }
+</style>
 <div class="container">
     <h1>Registrar Usuario</h1>
     <form action="{{ route('admin.register') }}" method="POST">

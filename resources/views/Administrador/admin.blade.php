@@ -7,7 +7,7 @@
 @section('content')
 <style>
     .main-sidebar {
-        background: #a6174b !important;
+        background: #0F3759 !important;
     }
 </style>
 <div class="container">
