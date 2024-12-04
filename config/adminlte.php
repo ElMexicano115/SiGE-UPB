@@ -347,6 +347,20 @@ return [
                 ],
             ],
         ],
+        [
+            'text' => 'Mesas',
+            'icon' => 'fas fa-fw fa-dice',
+            'submenu' => [
+                [
+                    'text' => 'Administrar',
+                    'url' => '/mesa',
+                ],
+                [
+                    'text' => 'Añadir',
+                    'url' => '/añadir_mesa',
+                ],
+            ],
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',

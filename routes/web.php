@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MesaController;
 use App\Http\Controllers\OrganizacionController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -45,13 +46,18 @@ Route::middleware('auth')->group(function () {
 //Rutas accesibles para cualquier tipo de admin
 Route::middleware(['auth', 'is.admin'])->group(function () {
     // Rutas comunes para todos los administradores
+
     //Listado de las organizaciones y sus opciones
     Route::get('/organizacion', [OrganizacionController::class, 'index'])->name('organizacion');
+
+    //Listado de las mesas y sus opciones
+    Route::get('/mesa', [MesaController::class, 'index'])->name('mesa');
 
 });
 
 // Rutas accesibles solo para administradores de tipo 1
 Route::middleware(['auth', 'admin.type:1'])->group(function () {
+    //Organizacion ///////////////////////////////////
     //Registrar Organización
     Route::get('/añadir_organizacion', function () {
         return view('Administrador.registrar_organizacion');
@@ -63,6 +69,19 @@ Route::middleware(['auth', 'admin.type:1'])->group(function () {
     Route::put('/organizacion/{organizacion}', [OrganizacionController::class, 'update'])->name('actualizar.organizacion');
     // Ruta para eliminar una universidad específica
     Route::delete('/organizazcion/{organizacion}', [OrganizacionController::class, 'destroy'])->name('borrar.organizacion');
+
+    //Mesas////////////////////////////////////////
+    //Registrar Mesa
+    Route::get('/añadir_mesa', function () {
+        return view('Administrador.registrar_mesa');
+    })->name('registro.mesa');
+    Route::post('/añadir_mesa', [MesaController::class, 'store'])->name('añadir.mesa');
+    //Ruta para mostrar la vista del formulario de edicion de la mesa
+    Route::get('/mesas/{mesa}/editar', [MesaController::class, 'edit'])->name('editar.mesa');
+    // Ruta para actualizar una mesa especifico
+    Route::put('/mesas/{mesa}', [MesaController::class, 'update'])->name('actualizar.mesa');
+    // Ruta para eliminar una mesa especifico
+    Route::delete('/mesas/{mesa}', [MesaController::class, 'destroy'])->name('borrar.mesa');
 });
 
 // Rutas accesibles solo para administradores de tipo 2
