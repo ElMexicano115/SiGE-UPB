@@ -15,6 +15,8 @@ use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
 // DomPDF
 use Barryvdh\DomPDF\Facade\Pdf;
+// Configuraciones
+use App\Models\Config;
 
 class RegistroController extends Controller
 {
@@ -96,8 +98,23 @@ class RegistroController extends Controller
             'tema' => $tema,
         ]);
 
+        // configuraciones para el top y bottom
+        $configuracion = Config::all();
+
         // Generar el PDF del gafete y guardarlo en la carpeta del usuario
-        $pdf = Pdf::loadView('gafete.designG', compact('registro'))->save(public_path("$basePath/{$registro->id}_gafete.pdf"));
+        $pdf = Pdf::loadView('gafete.designG', compact('registro', 'configuracion'))->save(public_path("$basePath/{$registro->id}_gafete.pdf"));
         return $pdf->download('Gafete.pdf');
+    }
+
+    // funcion para probar el gafete
+    public function gafeteTest(){
+        $configuracion = Config::all();
+        return view('gafete.gafeteTest', compact('configuracion'));
+    }
+
+    public function downloadGafete(){
+        $configuracion = Config::all();
+        $pdf = Pdf::loadView('gafete.gafeteTest', compact('configuracion'));
+        return $pdf->download('GafeteTest.pdf');
     }
 }

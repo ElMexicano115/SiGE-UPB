@@ -6,10 +6,10 @@
 
 @section('content')
 <style>
-    .main-sidebar {
-        background: #a6174b !important;
+    .main-sidebar{
+      background: #0F3759 !important;
     }
-</style>
+  </style>
     <table class="table">
         <!-- Encabezados de la tabla -->
         <thead>
