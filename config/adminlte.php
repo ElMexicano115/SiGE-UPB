@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'SiGE',
+    'title' => 'SIGE',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>SiGE</b>',
+    'logo' => '<b>SIGE</b>',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -342,16 +342,16 @@ return [
             ],
         ],
         [
-            'text' => 'Talleres',
-            'icon' => 'fas fa-fw fa-hammer',
+            'text' => 'Actividades',
+            'icon' => 'fas fa-puzzle-piece',
             'submenu' => [
                 [
                     'text' => 'Administrar',
-                    'url' => '/taller',
+                    'url' => '/actividades',
                 ],
                 [
                     'text' => 'Añadir',
-                    'url' => '/registroT',
+                    'url' => '/registroActividades',
                 ],
             ],
         ],

@@ -8,6 +8,7 @@ use App\Http\Controllers\FormBEController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\panelController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DashboardController;
 
 // Livewire
 use App\Livewire\Registro;
@@ -54,6 +55,17 @@ Route::middleware(['auth', 'is.admin'])->group(function () {
     Route::get("/administrador/adminPanel", [panelController::class, 'index'])->name('inicio');
     //Lsitado de las mesas y sus opciones
     Route::get('/mesa', [MesaController::class, 'index'])->name('mesa');
+
+    //Listado de actividades y sus opciones
+    Route::get('/actividades', [DashboardController::class, 'showActividades'])->name('actividad');
+    /*
+    //Ruta para mostrar la vista del formulario de edicion de actividades
+    Route::get('/actividades/{actividad}/editar', [ActividadController::class, 'edit'])->name('editar.actividad');
+    // Ruta para actualizar una actividad especifica
+    Route::put('/actividades/{actividad}', [ActividadController::class, 'update'])->name('actualizar.actividad');
+    // Ruta para eliminar una actividad especifica
+    Route::delete('/actividades/{actividad}', [ActividadController::class, 'destroy'])->name('borrar.actividad');
+    */
 
     Route::get("gafeteTest", [RegistroController::class, 'gafeteTest'])->name('gafeteTest');
     Route::get("downloadGafete", [RegistroController::class, 'downloadgafete'])->name('downloadGafete');

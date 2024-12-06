@@ -11,10 +11,6 @@
         .main-sidebar {
             background: #0F3759 !important;
         }
-
-        .main-header {
-            background: #36BBD9 !important;
-        }
     </style>
     <div id="respuesta"></div>
     <meta name="cstf-token" content="{{ csrf_token() }}">
@@ -320,7 +316,7 @@
                 <br>
                 <div class="input-group mb-3">
                     <label class="input-group-text" for="subir-gafete-top">Subir imagen superiror del gafete</label>
-                    <input type="file" class="form-control" id="subir-gafete-top" name="gafete-top">
+                    <input type="file" class="form-control" id="subir-gafete-top" name="gafeteTop">
                 </div>
                 <br>
                 La parte inferior del gafete actualmente en uso es: <br>
@@ -331,7 +327,7 @@
                 <br>
                 <div class="input-group mb-3">
                     <label class="input-group-text" for="subir-gafete-bottom">Subir imagen superiror del gafete</label>
-                    <input type="file" class="form-control" id="subir-gafete-bottom" name="gafete-bottom">
+                    <input type="file" class="form-control" id="subir-gafete-bottom" name="gafeteBottom">
                 </div>
                 <br>
                 <br>
@@ -355,7 +351,7 @@
                     }
                 </style>
                 <h2>Este es un aproximado de como se vera el gafete, para observar mejor el resultado final puede <a
-                        href="downloadGafete">descargar el gafete</a></h2>
+                        href="/downloadGafete">descargar el gafete</a></h2>
                 <table class="justify-content-center" style="margin-left: 55px; margin-top: 50px;">
                     <tr>
                         <td id="frente">
@@ -429,46 +425,46 @@
         crossorigin="anonymous"></script>
     <script>
         /* ajax
-                                                                                                $(function(){
-                                                                                                    $('#formularioEdit').on('submit', function(e){
-                                                                                                        e.preventDefault();
+                                                                                                        $(function(){
+                                                                                                            $('#formularioEdit').on('submit', function(e){
+                                                                                                                e.preventDefault();
 
-                                                                                                        var form = this;
-                                                                                                        $.ajax({
-                                                                                                            url:$(form).attr('action'),
-                                                                                                            method:$(form).attr('method'),
-                                                                                                            data: new FormData(form),
-                                                                                                            processData:false,
-                                                                                                            dataType:'json',
-                                                                                                            contentType:false,
-                                                                                                            success:function(data){
-                                                                                                                document.getElementById("respuesta").innerHTML = 'Pagina editada con exito';
-                                                                                                                document.getElementById("mostrar-logo").src="/assets/Formulario/"+@json($configuracion->where('Apartado', '=', 'logo')->first()->Valor);
-                                                                                                            }
+                                                                                                                var form = this;
+                                                                                                                $.ajax({
+                                                                                                                    url:$(form).attr('action'),
+                                                                                                                    method:$(form).attr('method'),
+                                                                                                                    data: new FormData(form),
+                                                                                                                    processData:false,
+                                                                                                                    dataType:'json',
+                                                                                                                    contentType:false,
+                                                                                                                    success:function(data){
+                                                                                                                        document.getElementById("respuesta").innerHTML = 'Pagina editada con exito';
+                                                                                                                        document.getElementById("mostrar-logo").src="/assets/Formulario/"+@json($configuracion->where('Apartado', '=', 'logo')->first()->Valor);
+                                                                                                                    }
+                                                                                                                });
+                                                                                                            });
                                                                                                         });
-                                                                                                    });
-                                                                                                });
-                                                                                                /*
-                                                                                                $(document).ready(function () {
-                                                                                                    $('#formularioEdit').on('submit',function() {
-                                                                                                        $.ajaxSetup({
-                                                                                                            headers:{
-                                                                                                                'C-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                                                                                            }
+                                                                                                        /*
+                                                                                                        $(document).ready(function () {
+                                                                                                            $('#formularioEdit').on('submit',function() {
+                                                                                                                $.ajaxSetup({
+                                                                                                                    headers:{
+                                                                                                                        'C-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                                                                                    }
+                                                                                                                });
+                                                                                                                $.ajax({
+                                                                                                                    url: '{{ route('actualizar.formulario') }}',
+                                                                                                                    type: 'POST',
+                                                                                                                    contentType: false,
+                                                                                                                    cache: false,
+                                                                                                                    processData:false,
+                                                                                                                    data: new FormData(this),
+                                                                                                                    success: function(response){
+                                                                                                                        document.getElementById("respuesta").innerHTML = 'Pagina editada con exito';
+                                                                                                                    }
+                                                                                                                })
+                                                                                                            });
                                                                                                         });
-                                                                                                        $.ajax({
-                                                                                                            url: '{{ route('actualizar.formulario') }}',
-                                                                                                            type: 'POST',
-                                                                                                            contentType: false,
-                                                                                                            cache: false,
-                                                                                                            processData:false,
-                                                                                                            data: new FormData(this),
-                                                                                                            success: function(response){
-                                                                                                                document.getElementById("respuesta").innerHTML = 'Pagina editada con exito';
-                                                                                                            }
-                                                                                                        })
-                                                                                                    });
-                                                                                                });
-                                                                                                */
+                                                                                                        */
     </script>
 @stop

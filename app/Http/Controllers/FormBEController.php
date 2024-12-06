@@ -24,7 +24,7 @@ class FormBEController extends Controller
     {
         $roles = Role::all();
         $organizaciones = Organizacion::all();
-        return view('formularioTry', compact('roles','organizaciones'));
+        return view('formularioTry', compact('roles', 'organizaciones'));
     }
     public function showConfig()
     {
@@ -50,99 +50,77 @@ class FormBEController extends Controller
             $logo->Valor = 'custom' . $nombreLogo;
             $logo->save();
         }
-        // seleccionar el color del logo
-        $colorLogo = $configuracion->where("Apartado", "=", "colorLogo")->first();
-        $colorLogo->Valor = $request->colorLogo;
-        $colorLogo->save();
 
-        //seccion de contacto
-        $colorTituloContacto = $configuracion->where('Apartado', '=', 'colorTituloContacto')->first();
-        $colorTituloContacto->Valor = $request->colorTituloContacto;
-        $colorTituloContacto->save();
-        $colorTextoTituloContacto = $configuracion->where('Apartado', '=', 'colorTextoTituloContacto')->first();
-        $colorTextoTituloContacto->Valor = $request->colorTextoTituloContacto;
-        $colorTextoTituloContacto->save();
-        $colorFondoContacto = $configuracion->where('Apartado', '=', 'colorFondoContacto')->first();
-        $colorFondoContacto->Valor = $request->colorFondoContacto;
-        $colorFondoContacto->save();
-        $colorTextoContacto = $configuracion->where('Apartado', '=', 'colorTextoContacto')->first();
-        $colorTextoContacto->Valor = $request->colorTextoContacto;
-        $colorTextoContacto->save();
-        $colorIconoContacto = $configuracion->where('Apartado', '=', 'colorIconoContacto')->first();
-        $colorIconoContacto->Valor = $request->colorIconoContacto;
-        $colorIconoContacto->save();
+        $GafeteTop = $configuracion->where("Apartado", "=", "gafeteTop")->first();
+        if ($request->hasFile('gafeteTop')) {
+            // Eliminar el archivo antiguo si existe
+            if ($GafeteTop->Valor) {
+                Storage::disk('assets')->delete('/assets/Gafete/' . $GafeteTop->Valor);
+            }
+            // Guardar el nuevo archivo
+            $nombreGafeteTop = 'custom' . $request->gafeteTop->hashName();
+            $request->gafeteTop->storeAs('/assets/Gafete', $nombreGafeteTop, 'assets');
+            // Actualizar el valor en la base de datos
+            $GafeteTop->Valor = $nombreGafeteTop;
+            $GafeteTop->save();
+        }
 
-        //seccion de talleres
-        $colorTituloTaller = $configuracion->where('Apartado', '=', 'colorTituloTaller')->first();
-        $colorTituloTaller->Valor = $request->colorTituloTaller;
-        $colorTituloTaller->save();
-        $colorTextoTituloTaller = $configuracion->where('Apartado', '=', 'colorTextoTituloTaller')->first();
-        $colorTextoTituloTaller->Valor = $request->colorTextoTituloTaller;
-        $colorTextoTituloTaller->save();
-        $colorFondoTaller = $configuracion->where('Apartado', '=', 'colorFondoTaller')->first();
-        $colorFondoTaller->Valor = $request->colorFondoTaller;
-        $colorFondoTaller->save();
-        $colorTextoTaller = $configuracion->where('Apartado', '=', 'colorTextoTaller')->first();
-        $colorTextoTaller->Valor = $request->colorTextoTaller;
-        $colorTextoTaller->save();
-        $colorBotonTaller = $configuracion->where('Apartado', '=', 'colorBotonTaller')->first();
-        $colorBotonTaller->Valor = $request->colorBotonTaller;
-        $colorBotonTaller->save();
-        $colorBotonTextoTaller = $configuracion->where('Apartado', '=', 'colorBotonTextoTaller')->first();
-        $colorBotonTextoTaller->Valor = $request->colorBotonTextoTaller;
-        $colorBotonTextoTaller->save();
+        $GafeteBottom = $configuracion->where("Apartado", "=", "gafeteBottom")->first();
+        if ($request->hasFile('gafeteBottom')) {
+            // Eliminar el archivo antiguo si existe
+            if ($GafeteBottom->Valor) {
+                Storage::disk('assets')->delete('/assets/Gafete/' . $GafeteBottom->Valor);
+            }
+            // Guardar el nuevo archivo
+            $nombreGafeteBottom = 'custom' . $request->gafeteBottom->hashName();
+            $request->gafeteBottom->storeAs('/assets/Gafete', $nombreGafeteBottom, 'assets');
+            // Actualizar el valor en la base de datos
+            $GafeteBottom->Valor = $nombreGafeteBottom;
+            $GafeteBottom->save();
+        }
 
-        //seccion de redes sociales
-        $colorTituloRedes = $configuracion->where('Apartado', '=', 'colorTituloRedes')->first();
-        $colorTituloRedes->Valor = $request->colorTituloRedes;
-        $colorTituloRedes->save();
-        $colorTextoTituloRedes = $configuracion->where('Apartado', '=', 'colorTextoTituloRedes')->first();
-        $colorTextoTituloRedes->Valor = $request->colorTextoTituloRedes;
-        $colorTextoTituloRedes->save();
-        $colorFondoRedes = $configuracion->where('Apartado', '=', 'colorFondoRedes')->first();
-        $colorFondoRedes->Valor = $request->colorFondoRedes;
-        $colorFondoRedes->save();
-        $redesLink = $configuracion->where('Apartado', '=', 'redesLink')->first();
-        $redesLink->Valor = $request->redesLink;
-        $redesLink->save();
+        function actualizarConfiguracion($configuracion, $apartado, $nuevoValor)
+        {
+            $item = $configuracion->where("Apartado", "=", $apartado)->first();
+            if ($item) {
+                $item->Valor = $nuevoValor;
+                $item->save();
+            }
+        }
 
-        //color del fondo
-        $colorFondo = $configuracion->where("Apartado", "=", "colorFondo")->first();
-        $colorFondo->Valor = $request->colorFondo;
-        $colorFondo->save();
+        $camposConfiguracion = [
+            'colorLogo' => $request->colorLogo,
+            'colorTituloContacto' => $request->colorTituloContacto,
+            'colorTextoTituloContacto' => $request->colorTextoTituloContacto,
+            'colorFondoContacto' => $request->colorFondoContacto,
+            'colorTextoContacto' => $request->colorTextoContacto,
+            'colorIconoContacto' => $request->colorIconoContacto,
+            'colorTituloTaller' => $request->colorTituloTaller,
+            'colorTextoTituloTaller' => $request->colorTextoTituloTaller,
+            'colorFondoTaller' => $request->colorFondoTaller,
+            'colorTextoTaller' => $request->colorTextoTaller,
+            'colorBotonTaller' => $request->colorBotonTaller,
+            'colorBotonTextoTaller' => $request->colorBotonTextoTaller,
+            'colorTituloRedes' => $request->colorTituloRedes,
+            'colorTextoTituloRedes' => $request->colorTextoTituloRedes,
+            'colorFondoRedes' => $request->colorFondoRedes,
+            'redesLink' => $request->redesLink,
+            'colorFondo' => $request->colorFondo,
+            'colorFooter' => $request->colorFooter,
+            'colorTextoFooter' => $request->colorTextoFooter,
+            'textoFooter' => $request->textoFooter,
+            'colorFondoTituloFormulario' => $request->colorFondoTituloFormulario,
+            'colorTextoTituloFormulario' => $request->colorTextoTituloFormulario,
+            'colorFondoFormulario' => $request->colorFondoFormulario,
+            'colorTextoFormulario' => $request->colorTextoFormulario,
+            'colorBotonFormulario' => $request->colorBotonFormulario,
+            'colorBotonTextoFormulario' => $request->colorBotonTextoFormulario,
+        ];
 
-        //color del fondo del footer
-        $colorFooter = $configuracion->where('Apartado', '=', 'colorFooter')->first();
-        $colorFooter->Valor = $request->colorFooter;
-        $colorFooter->save();
-        //color del texto del footer
-        $colorTextoFooter = $configuracion->where('Apartado', '=', 'colorTextoFooter')->first();
-        $colorTextoFooter->Valor = $request->colorTextoFooter;
-        $colorTextoFooter->save();
-        // texto del footer
-        $textoFooter = $configuracion->where('Apartado', '=', 'textoFooter')->first();
-        $textoFooter->Valor = $request->textoFooter;
-        $textoFooter->save();
+        foreach ($camposConfiguracion as $apartado => $valor) {
+            actualizarConfiguracion($configuracion, $apartado, $valor);
+        }
 
-        //formulario
-        $colorFondoTituloFormulario = $configuracion->where('Apartado', '=', 'colorFondoTituloFormulario')->first();
-        $colorFondoTituloFormulario->Valor = $request->colorFondoTituloFormulario;
-        $colorFondoTituloFormulario->save();
-        $colorTextoTituloFormulario = $configuracion->where('Apartado', '=', 'colorTextoTituloFormulario')->first();
-        $colorTextoTituloFormulario->Valor = $request->colorTextoTituloFormulario;
-        $colorTextoTituloFormulario->save();
-        $colorFondoFormulario = $configuracion->where('Apartado', '=', 'colorFondoFormulario')->first();
-        $colorFondoFormulario->Valor = $request->colorFondoFormulario;
-        $colorFondoFormulario->save();
-        $colorTextoFormulario = $configuracion->where('Apartado', '=', 'colorTextoFormulario')->first();
-        $colorTextoFormulario->Valor = $request->colorTextoFormulario;
-        $colorTextoFormulario->save();
-        $colorBotonFormulario = $configuracion->where('Apartado', '=', 'colorBotonFormulario')->first();
-        $colorBotonFormulario->Valor = $request->colorBotonFormulario;
-        $colorBotonFormulario->save();
-        $colorBotonTextoFormulario = $configuracion->where('Apartado', '=', 'colorBotonTextoFormulario')->first();
-        $colorBotonTextoFormulario->Valor = $request->colorBotonTextoFormulario;
-        $colorBotonTextoFormulario->save();
 
         // activador de seccion de mas informacion
         if ($request->infoAdicional == null) {
