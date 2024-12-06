@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\Activity;
+use App\Models\Registro;
+use App\Models\Organizacion;
+use App\Models\Mesa;
+use App\Models\Role;
 
 class DashboardController extends Controller
 {
@@ -25,70 +29,65 @@ class DashboardController extends Controller
         $mesas = Mesa::all();
         return view('mesa', compact('mesas'));
     }
-
+    */
     public function showAsistencias()
     {
-        $asistencias = Asistencia::all();
-        $workshops = Taller::all();
-        $mesas = Mesa::all();
-        return view('asistencias', compact('asistencias','workshops','mesas'));
+        return view('administrador.asistencias');
     }
 
+    
     public function showUsers()
     {
-        $workshops = Taller::all();
+        $users = Registro::all();
+        $actividades = Activity::all();
         $mesas = Mesa::all();
-        $usuarios = User::all();
-        $badges = Badge::all();
-        $roles = EventRole::all();
-        $universidades = University::all();
-        return view('usuarios', compact('workshops','mesas','usuarios','badges','roles','universidades'));
+        $roles = Role::all();
+        $organizaciones = Organizacion::all();
+        return view('administrador.usuarios', compact('users', 'actividades', 'mesas', 'roles', 'organizaciones'));
     }
 
-    public function dashboard()
+    public function adminPanel()
     {
         // Obtener el conteo de usuarios por universidad
-        $userCounts = User::select('university_id', DB::raw('count(*) as total'))
-        ->groupBy('university_id')
+        $userCounts = Registro::select('organizacion', DB::raw('count(*) as total'))
+        ->groupBy('organizacion')
         ->get();
 
         $data = [];
         $labels = [];
         $colors = [];
-        $universidades = [];
+        $organizaciones = [];
 
         foreach ($userCounts as $userCount) {
-            $university = University::find($userCount->university_id);
-            if ($university) {
-                $labels[] = $university->name;
+            $organizacion = Organizacion::find($userCount->organizacion);
+            if ($organizacion) {
+                $labels[] = $organizacion->nombre;
                 $data[] = $userCount->total;
                 $colors[] = sprintf('#%06X', mt_rand(0, 0xFFFFFF)); // Generar color aleatorio
-                $universidades[] = $university; // Guardar la universidad
+                $organizaciones[] = $organizacion; // Guardar la universidad
             }
         }
 
-        $workshops = Taller::all();
+        $actividades = Activity::all();
         $mesas = Mesa::all();
-        $usuarios = User::all();
+        $usuarios = Registro::all();
 
-        $totalUsers = User::count();
-        $totalWorkshops = Taller::count();
+        $totalUsers = Registro::count();
+        $totalActivities = Activity::count();
         $totalMesas = Mesa::count();
-        $totalAsistencias = Asistencia::count();
-        $totalUniversidades = University::count();
+        $totalOrganizaciones = Organizacion::count();
 
-        return view('dashboard', compact('data', 'labels', 'colors','workshops','totalWorkshops','mesas','totalMesas','usuarios','totalUsers','universidades','totalUniversidades','totalAsistencias'));
+        return view('administrador.adminPanel', compact('data', 'labels', 'colors','actividades','totalActivities','mesas','totalMesas','usuarios','totalUsers','organizaciones','totalOrganizaciones'));
     }
-
+    /*
     public function showExcel()
     {
-        $workshops = Taller::all();
+        $users = Registro::all();
+        $actividades = Activity::all();
         $mesas = Mesa::all();
-        $usuarios = User::all();
-        $badges = Badge::all();
-        $roles = EventRole::all();
-        $universidades = University::all();
-        return view('excel', compact('workshops','mesas','usuarios','badges','roles','universidades'));
+        $roles = Role::all();
+        $organizaciones = Organizacion::all();
+        return view('administrador.excel', compact('users', 'actividades', 'mesas', 'roles', 'organizaciones'));
     }
-    */
+        */
 }

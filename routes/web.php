@@ -52,7 +52,7 @@ Route::middleware(['auth', 'is.admin'])->group(function () {
 
     //Listado de las organizaciones y sus opciones
     Route::get('/organizacion', [OrganizacionController::class, 'index'])->name('organizacion');
-    Route::get("/administrador/adminPanel", [panelController::class, 'index'])->name('inicio');
+    Route::get("/administrador/adminPanel", [DashboardController::class, 'adminPanel'])->name('inicio');
     //Lsitado de las mesas y sus opciones
     Route::get('/mesa', [MesaController::class, 'index'])->name('mesa');
 
@@ -66,6 +66,15 @@ Route::middleware(['auth', 'is.admin'])->group(function () {
     // Ruta para eliminar una actividad especifica
     Route::delete('/actividades/{actividad}', [ActividadController::class, 'destroy'])->name('borrar.actividad');
     */
+
+    //Usuarios
+    Route::get('/usuarios', [DashboardController::class, 'showUsers'])->name('usuarios');
+
+    //Asistencias
+    Route::get('/asistencias', [DashboardController::class, 'showAsistencias'])->name('asistencias');
+
+    //Reportes
+    Route::get('/excel', [DashboardController::class, 'showExcel'])->name('excel');
 
     Route::get("gafeteTest", [RegistroController::class, 'gafeteTest'])->name('gafeteTest');
     Route::get("downloadGafete", [RegistroController::class, 'downloadgafete'])->name('downloadGafete');

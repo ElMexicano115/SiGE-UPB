@@ -355,6 +355,7 @@ return [
                 ],
             ],
         ],
+        ['header' => 'Herramientas de administrador'],
         [
             'text' => 'Administrar',
             'icon' => 'fas fa-fw fa-th-list',
